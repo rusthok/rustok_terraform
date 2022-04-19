@@ -9,13 +9,13 @@ provider "aws" {
 
 
 locals {
-  cluster_name = "wordpress-eks-${random_string.suffix.result}"
+  cluster_name = "wordpress-eks-02032022" #"wordpress-eks-${random_string.suffix.result}"
 }
 
-resource "random_string" "suffix" {
-  length  = 8
-  special = false
-}
+#resource "random_string" "suffix" {
+#  length  = 8
+#  special = false
+#}
 
 #VPC
 resource "aws_vpc" "vpc" {
