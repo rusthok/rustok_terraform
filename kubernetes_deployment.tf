@@ -1,5 +1,5 @@
 resource "kubernetes_deployment" "wordpress" {
-	depends_on = [module.kwordpressdb]
+  depends_on = [module.kwordpressdb]
   metadata {
     name = "wordpress"
     labels = {
@@ -27,7 +27,7 @@ resource "kubernetes_deployment" "wordpress" {
 
           port {
             container_port = 80 #8080
-			#target_port = 80 #8080
+            #target_port = 80 #8080
           }
 
           resources {
@@ -41,11 +41,11 @@ resource "kubernetes_deployment" "wordpress" {
             }
           }
         }
-		#liveness_probe {
+        #liveness_probe {
         #    http_get {
         #      path = "/"
         #      port = 80
-		#
+        #
         #      http_header {
         #        name  = "X-Custom-Header"
         #        value = "Awesome"
@@ -58,20 +58,20 @@ resource "kubernetes_deployment" "wordpress" {
 }
 
 resource "kubernetes_service" "kservice" {
-	depends_on = [kubernetes_deployment.wordpress]
-	metadata {
-		name = "wp-service"
-	}
-	spec {
-		selector = {
-			App = kubernetes_deployment.wordpress.metadata.0.labels.App
-		}
-		port {
-			port = 80 #8080
-			target_port = 80
-		}
-		type = "NodePort"
-	}
+  depends_on = [kubernetes_deployment.wordpress]
+  metadata {
+    name = "wp-service"
+  }
+  spec {
+    selector = {
+      App = kubernetes_deployment.wordpress.metadata.0.labels.App
+    }
+    port {
+      port        = 80 #8080
+      target_port = 80
+    }
+    type = "NodePort"
+  }
 }
 
 

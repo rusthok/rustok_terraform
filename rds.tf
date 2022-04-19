@@ -28,7 +28,7 @@ module "kwordpressdb" {
   security_groups = [
     #aws_security_group.kube-wp-sg.id,#to be defined
     #module.eks.cluster_primary_security_group_id #to be define
-	aws_security_group.DBsecuritygroup.id, module.eks.cluster_primary_security_group_id
-	
+    aws_security_group.DBsecuritygroup.id, module.eks.cluster_primary_security_group_id
+
   ]
 }

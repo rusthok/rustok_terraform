@@ -1,6 +1,6 @@
 variable "region" {
-	default = "us-east-1"
-	description = "AWS region"
+  default     = "us-east-1"
+  description = "AWS region"
 }
 
 provider "aws" {
@@ -40,12 +40,12 @@ resource "aws_eip" "elasticIP2" { #elasticIPNatGateway2
 
 ##NAT
 resource "aws_nat_gateway" "nat1" {
-  allocation_id = aws_eip.elasticIP1.id         # attaching elasticIP
+  allocation_id = aws_eip.elasticIP1.id        # attaching elasticIP
   subnet_id     = aws_subnet.public_subnet1.id #will be attached to public_subnet1
   #availability_zone = "us-east-1a"
 }
 resource "aws_nat_gateway" "nat2" {
-  allocation_id = aws_eip.elasticIP2.id         # attaching elasticIP
+  allocation_id = aws_eip.elasticIP2.id        # attaching elasticIP
   subnet_id     = aws_subnet.public_subnet2.id #will be attached to public_subnet2
   #availability_zone = "us-east-1a"
 }

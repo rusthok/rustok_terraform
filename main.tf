@@ -32,38 +32,38 @@ terraform {
 
 
 module "eks" {
-	source = "terraform-aws-modules/eks/aws"
-	version = "17.24.0"
-	cluster_name = local.cluster_name
-	cluster_version = "1.20"
-	#cluster_version = "1.20"
-	subnets = [aws_subnet.private_wordpresssubnet1.id, aws_subnet.private_wordpresssubnet2.id]
-	tags = {
-		Name = "WordpressKubernetesCluster"
-	}
-	
-	vpc_id = aws_vpc.vpc.id
-	
-	workers_group_defaults = {
-		root_volume_type = "gp2"
-	}
-	
-	worker_groups = [
-		{
-			name = "wordpress-worker-group-1a"
-			instance_type = "t2.small"
-			additional_userdata = "echo foo bar"
-			asg_desired_capacity = 2
-			additional_security_group_ids = [aws_security_group.privateNSG.id]
-		},
-		{
-			name = "wordpress-worker-group-1b"
-			instance_type = "t2.medium"
-			additional_userdata = "echo foo bar"
-			asg_desired_capacity = 1
-			additional_security_group_ids = [aws_security_group.privateNSG.id]
-		},
-	]
+  source          = "terraform-aws-modules/eks/aws"
+  version         = "17.24.0"
+  cluster_name    = local.cluster_name
+  cluster_version = "1.20"
+  #cluster_version = "1.20"
+  subnets = [aws_subnet.private_wordpresssubnet1.id, aws_subnet.private_wordpresssubnet2.id]
+  tags = {
+    Name = "WordpressKubernetesCluster"
+  }
+
+  vpc_id = aws_vpc.vpc.id
+
+  workers_group_defaults = {
+    root_volume_type = "gp2"
+  }
+
+  worker_groups = [
+    {
+      name                          = "wordpress-worker-group-1a"
+      instance_type                 = "t2.small"
+      additional_userdata           = "echo foo bar"
+      asg_desired_capacity          = 2
+      additional_security_group_ids = [aws_security_group.privateNSG.id]
+    },
+    {
+      name                          = "wordpress-worker-group-1b"
+      instance_type                 = "t2.medium"
+      additional_userdata           = "echo foo bar"
+      asg_desired_capacity          = 1
+      additional_security_group_ids = [aws_security_group.privateNSG.id]
+    },
+  ]
 }
 
 data "aws_eks_cluster" "cluster" {
