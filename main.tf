@@ -19,7 +19,15 @@ terraform {
     bucket         = "mybackendterraformawss3"
     dynamodb_table = "backendTerraformLockTable"
   }
+  cloud {
+    organization = "rustok"
+
+    workspaces {
+      name = "rustok_terraform"
+    }
+  }
 }
+
 
 
 module "eks" {
