@@ -80,7 +80,7 @@ data "aws_eks_cluster_auth" "cluster" {
 resource "aws_instance" "jumpbox-a" {
   ami           = data.aws_ssm_parameter.amazon-ami.value
   instance_type = "t2.micro"
-  #key_name                    = aws_key_pair.key.key_name
+  #key_name                    = aws_key_pair.key.key_name #
   key_name                    = "key"
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.publicNSG.id]
