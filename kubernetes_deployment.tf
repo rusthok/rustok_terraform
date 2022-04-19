@@ -22,7 +22,7 @@ resource "kubernetes_deployment" "wordpress" {
       }
       spec {
         container {
-          image = "bitnami/wordpress"
+          image = "bitnami/wordpress:latest"
           name  = "wordpress"
 
           port {
@@ -64,7 +64,7 @@ resource "kubernetes_service" "kservice" {
 	}
 	spec {
 		selector = {
-			app = kubernetes_deployment.wordpress.metadata.0.labels.App
+			App = kubernetes_deployment.wordpress.metadata.0.labels.App
 		}
 		port {
 			port = 80 #8080

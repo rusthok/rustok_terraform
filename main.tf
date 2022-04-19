@@ -3,6 +3,12 @@
 ###run aws configure with access key and secret access key
 ##configure github actions with the correct access key and secret access key in the github secrets to let autotrigger the deployment with each push
 #Test every change on the code
+#terraform init -backend-config="access_key=AKIAVHZDA4G74B7C6SUR" -backend-config="secret_key=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"
+#aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+#aws eks --region us-east-1 update-kubeconfig --name wordpress-eks-2u4c9xQJ
+#kubectl get nodes
+#kubectl get nodes -A
+#kubectl describe pod wordpress-7f78bb5f98-4pq22
 
 terraform {
   required_version = ">= 0.13"
@@ -21,6 +27,7 @@ module "eks" {
 	version = "17.24.0"
 	cluster_name = local.cluster_name
 	cluster_version = "1.20"
+	#cluster_version = "1.20"
 	subnets = [aws_subnet.private_wordpresssubnet1.id, aws_subnet.private_wordpresssubnet2.id]
 	tags = {
 		Name = "WordpressKubernetesCluster"
@@ -75,6 +82,10 @@ sudo yum -y update
 sudo yum -y install httpd
 sudo systemctl start httpd
 sudo systemctl enable httpd
+curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
 echo "<h1><center>" > index.html
 echo "Hello World from $(hostname -f) for R/&D_EPAM" >> index.html
 echo "</center></h1>" >> index.html
@@ -103,4 +114,37 @@ EOF
 data "aws_ssm_parameter" "amazon-ami" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
+
+
+
+
+
+
+
+#{
+#    "Version": "2012-10-17",
+#    "Statement": [
+#        {
+#            "Effect": "Allow",
+#            "Principal": {
+#                "AWS": "arn:aws:iam::360313840063:user/cloud_user"
+#            },
+#            "Action": "s3:ListBucket",
+#            "Resource": "arn:aws:s3:::mybackendterraformawss3"
+#        },
+#        {
+#            "Effect": "Allow",
+#            "Principal": {
+#                "AWS": "arn:aws:iam::360313840063:user/cloud_user"
+#            },
+#            "Action": [
+#                "s3:GetObject",
+#                "s3:PutObject",
+#                "s3:DeleteObject"
+#            ],
+#            "Resource": "arn:aws:s3:::mybackendterraformawss3/*"
+#        }
+#    ]
+#}
+#
 
