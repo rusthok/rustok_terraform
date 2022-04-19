@@ -17,44 +17,44 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
-	with:
-	  # terraform_version: 0.13.0
-	  cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+	    with:
+	    # terraform_version: 0.13.0
+	    cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Terraform Format
         id: fmt
-	run: terraform fmt -check
+	    run: terraform fmt -check
 
       - name: Terraform Init
         id: init
-	run: terraform init
+	    run: terraform init
 
       - name: Terraform Validate
         id: validate
-	run: terraform validate -no-color
+	    run: terraform validate -no-color
 
       - name: Terraform Plan
         id: plan
-	if: github.event_name == 'pull_request'
-	run: terraform plan -no-color -input=false
-	continue-on-error: true
+	    if: github.event_name == 'pull_request'
+	    run: terraform plan -no-color -input=false
+	    continue-on-error: true
 
       - name: Update Pull Request
         uses: actions/github-script@6
-	if: github.event_name == 'pull_request'
-	env:
-	  PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-	with:
-	  github-token: ${{ secrets.GITHUB_TOKEN }}
-	  script: |
-	    const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-	    #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-	    #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-	    #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-
-	    <details><summary>Show Plan</summary>
-
-	    \`\`\`\n
+	    if: github.event_name == 'pull_request'
+	    env:
+	      PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+	    with:
+	      github-token: ${{ secrets.GITHUB_TOKEN }}
+	      script: |
+	        const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+	        #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+	        #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+	        #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+       
+	        <details><summary>Show Plan</summary>
+        
+	        \`\`\`\n
 	    ${process.env.PLAN}
 	    \`\`\`
 
@@ -70,9 +70,9 @@ jobs:
 	    })
 
       - name: Terraform Plan Status
-	if: steps.plan.outcome == 'failure'
-	run: exit 1
+	    if: steps.plan.outcome == 'failure'
+	    run: exit 1
 
       - name:Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-	  run: terraform apply -auto-approve -input=false
+	    run: terraform apply -auto-approve -input=false
