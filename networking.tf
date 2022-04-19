@@ -7,7 +7,7 @@ provider "aws" {
   region = var.region
 }
 
-
+#
 locals {
   cluster_name = "wordpress-eks-02032022" #"wordpress-eks-${random_string.suffix.result}"
 }
