@@ -9,6 +9,7 @@
 #kubectl get nodes
 #kubectl get nodes -A
 #kubectl describe pod wordpress-7f78bb5f98-4pq22
+#
 
 terraform {
   required_version = ">= 0.13"
