@@ -78,6 +78,7 @@ resource "kubernetes_service" "kservice" {
     #}
     #type = "NodePort"
 	
+	#uncomment below when kubernetes_loadbalancer.tf is also uncommented to activated it
 	#session_affinity = "ClientIP"
 	
 	port {
