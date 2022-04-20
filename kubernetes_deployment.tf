@@ -36,8 +36,8 @@ resource "kubernetes_deployment" "wordpress" {
               memory = "10000Mi"
             }
             requests = {
-              cpu    = "5000m"
-              memory = "5000Mi"
+              cpu    = "500m"
+              memory = "500Mi"
             }
           }
         }
