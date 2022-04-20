@@ -17,6 +17,7 @@ provider "kubernetes" {
 ###podria borrarse
 variable "cluster_name" {
   type = string
+  default = "wordpress-eks-02032022"
 }
 
 data "aws_eks_cluster" "example" {
