@@ -8,7 +8,7 @@ resource "kubernetes_deployment" "wordpress" {
   }
 
   spec {
-    replicas = 2
+    replicas = 1
     selector {
       match_labels = {
         App = "wordpress"
@@ -78,7 +78,7 @@ resource "kubernetes_service" "kservice" {
     #}
     #type = "NodePort"
 	
-	session_affinity = "ClientIP"
+	#session_affinity = "ClientIP"
 	
 	port {
       port        = 80 #8080
