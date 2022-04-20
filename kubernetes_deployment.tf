@@ -8,7 +8,7 @@ resource "kubernetes_deployment" "wordpress" {
   }
 
   spec {
-    replicas = 2
+    replicas = 3
     selector {
       match_labels = {
         App = "wordpress"
@@ -67,11 +67,16 @@ resource "kubernetes_service" "kservice" {
     selector = {
       App = kubernetes_deployment.wordpress.metadata.0.labels.App
     }
-    port {
+    #port {
+    #  port        = 80 #8080
+    #  target_port = 80
+    #}
+    #type = "NodePort"
+	port {
       port        = 80 #8080
       target_port = 80
     }
-    type = "NodePort"
+    type = "LoadBalancer"
   }
 }
 
