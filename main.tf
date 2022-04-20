@@ -13,6 +13,7 @@
 #set environment variables 
 #AWS_ACCESS_KEY_ID
 #AWS_SECRET_ACCESS_KEY
+#kubectl get pods -l "App=wordpress" -o wide
 
 terraform {
   required_version = ">= 0.13"

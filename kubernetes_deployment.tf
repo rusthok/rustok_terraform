@@ -72,11 +72,16 @@ resource "kubernetes_service" "kservice" {
     #  target_port = 80
     #}
     #type = "NodePort"
+	
+	session_affinity = "ClientIP"
+	
 	port {
       port        = 80 #8080
       target_port = 80
     }
-    type = "LoadBalancer"
+	
+	type = "LoadBalancer"
+    
   }
 }
 
