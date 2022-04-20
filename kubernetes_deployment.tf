@@ -36,11 +36,12 @@ resource "kubernetes_deployment" "wordpress" {
               memory = "10000Mi"
             }
             requests = {
-              cpu    = "1"
+              cpu    = "1" 
               memory = "1000Mi"
             }
           }
         }
+		#
         #liveness_probe {
         #    http_get {
         #      path = "/"
