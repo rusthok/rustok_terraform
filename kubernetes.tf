@@ -20,9 +20,10 @@ variable "cluster_name" {
   default = "wordpress-eks-02032022"
 }
 
-data "aws_eks_cluster" "example" {
-  name = var.cluster_name
-}
+#uncommentbelow
+#data "aws_eks_cluster" "example" {
+#  name = var.cluster_name
+#}
 
 data "aws_eks_cluster_auth" "example" {
   name = var.cluster_name
