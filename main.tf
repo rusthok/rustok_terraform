@@ -5,11 +5,11 @@
 #Test every change on the code
 #terraform init -backend-config="access_key=AKIAVHZDA4G74B7C6SUR" -backend-config="secret_key=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"
 #aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
-#aws eks --region us-east-1 update-kubeconfig --name wordpress-eks-2u4c9xQJ
+#aws eks --region us-east-1 update-kubeconfig --name wordpress-eks-02032022
 #kubectl get nodes
 #kubectl get nodes -A
 #kubectl describe pod wordpress-7f78bb5f98-4pq22
-#
+#kubectl describe pod wordpress-7f78bb5f98-4pq22 | tail -15
 
 
 terraform {
