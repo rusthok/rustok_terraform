@@ -30,7 +30,7 @@ data "aws_eks_cluster_auth" "example" {
 
 # Create a local variable for the load balancer name.
 locals {
- depends_on = [kubernetes_service.kservice]
+# depends_on = [kubernetes_service.kservice]
   lb_name = split("-", split(".", kubernetes_service.kservice.status.0.load_balancer.0.ingress.0.hostname).0).0
   #lb_name = "wordpress-eks-02032022_lbname"
 }
