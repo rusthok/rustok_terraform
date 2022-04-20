@@ -78,7 +78,7 @@ resource "kubernetes_service" "kservice" {
     #}
     type = "NodePort"
 	
-	session_affinity = "ClientIP"
+	#session_affinity = "ClientIP"
 	
 	port {
       port        = 80 #8080
