@@ -21,6 +21,7 @@ variable "cluster_name" {
 
 
 data "aws_eks_cluster" "example" {
+  depends_on = [module.eks]  #
   name = var.cluster_name
 }
 
