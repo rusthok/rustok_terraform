@@ -8,7 +8,7 @@ resource "kubernetes_deployment" "wordpress" {
   }
 
   spec {
-    replicas = 2
+    replicas = 1
     selector {
       match_labels = {
         App = "wordpress"
@@ -22,7 +22,7 @@ resource "kubernetes_deployment" "wordpress" {
       }
       spec {
         container {
-          image = "bitnami/wordpress:latest"
+          image = "wordpress:4.8-apache" #"bitnami/wordpress:latest"
           name  = "wordpress"
 
           port {
