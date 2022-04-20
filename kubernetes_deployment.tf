@@ -59,6 +59,10 @@ resource "kubernetes_deployment" "wordpress" {
 }
 
 
+
+
+
+
 resource "kubernetes_service" "kservice" {
   depends_on = [kubernetes_deployment.wordpress]
   metadata {
@@ -72,7 +76,7 @@ resource "kubernetes_service" "kservice" {
     #  port        = 80 #8080
     #  target_port = 80
     #}
-    #type = "NodePort"
+    type = "NodePort"
 	
 	session_affinity = "ClientIP"
 	
@@ -81,7 +85,7 @@ resource "kubernetes_service" "kservice" {
       target_port = 80
     }
 	
-	type = "LoadBalancer"
+	#type = "LoadBalancer"
     
   }
 }
