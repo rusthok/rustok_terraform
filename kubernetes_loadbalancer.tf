@@ -1,16 +1,17 @@
 #LB kubernetes
-provider "kubernetes" {
-  host                   = data.aws_eks_cluster.cluster.endpoint
-  token                  = data.aws_eks_cluster_auth.cluster.token
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
-##parte del lb
-  exec {
-    api_version = "client.authentication.k8s.io/v1alpha1"
-    args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
-    command     = "aws"
-  }
-#####parte del lb  
-}
+#Below is how the provider from kubernetes.tf must look like while activating LB
+#provider "kubernetes" {
+#  host                   = data.aws_eks_cluster.cluster.endpoint
+#  token                  = data.aws_eks_cluster_auth.cluster.token
+#  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+###parte del lb
+#  exec {
+#    api_version = "client.authentication.k8s.io/v1alpha1"
+#    args        = ["eks", "get-token", "--cluster-name", var.cluster_name]
+#    command     = "aws"
+#  }
+######parte del lb  
+#}
 
 
 
