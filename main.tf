@@ -54,14 +54,14 @@ module "eks" {
       name                          = "wordpress-worker-group-1a"
       instance_type                 = "t2.small"
       additional_userdata           = "echo foo bar"
-      asg_desired_capacity          = 2
+      asg_desired_capacity          = 3
       additional_security_group_ids = [aws_security_group.privateNSG.id]
     },
     {
       name                          = "wordpress-worker-group-1b"
       instance_type                 = "t2.medium"
       additional_userdata           = "echo foo bar"
-      asg_desired_capacity          = 1
+      asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.privateNSG.id]
     },
   ]
