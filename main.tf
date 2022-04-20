@@ -80,47 +80,47 @@ data "aws_eks_cluster_auth" "cluster" {
 
 
 
-#resource "aws_instance" "jumpbox-a" {
-#  ami           = data.aws_ssm_parameter.amazon-ami.value
-#  instance_type = "t2.micro"
-#  #key_name                    = aws_key_pair.key.key_name #
-#  key_name                    = "key"
-#  associate_public_ip_address = true
-#  vpc_security_group_ids      = [aws_security_group.publicNSG.id]
-#  subnet_id                   = aws_subnet.public_subnet1.id
-#  #user_data                   = fileexists("webserverinstallation.sh") ? file("webserverinstallation.sh") : null
-#  user_data = <<EOF
-##!/bin/bash
-#sudo yum -y update
-#sudo yum -y install httpd
-#sudo systemctl start httpd
-#sudo systemctl enable httpd
-#curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
-#chmod +x ./kubectl
-#mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-#echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
-#echo "<h1><center>" > index.html
-#echo "Hello World from $(hostname -f) for R/&D_EPAM" >> index.html
-#echo "</center></h1>" >> index.html
-#mv index.html /var/www/html/
-#EOF
-#  #  provisioner "remote-exec" {
-#  #    inline = [
-#  #      "sudo yum -y update && sudo yum -y install httpd && sudo systemctl start httpd",
-#  #      "echo '<h1><center>Jumpbox-a</center></h1>' > index.html",
-#  #      "sudo mv index.html /var/www/html/"
-#  #    ]
-#  #    connection {
-#  #      type        = "ssh"
-#  #      user        = "ec2-user"
-#  #      private_key = file("~/.ssh/id_rsa.pub")
-#  #      host        = self.public_ip
-#  #    }
-#  #  }
-#  tags = {
-#    Name = "jumpbox-a"
-#  }
-#}
+resource "aws_instance" "jumpbox-a" {
+  ami           = data.aws_ssm_parameter.amazon-ami.value
+  instance_type = "t2.micro"
+  #key_name                    = aws_key_pair.key.key_name #
+  key_name                    = "key"
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.publicNSG.id]
+  subnet_id                   = aws_subnet.public_subnet1.id
+  #user_data                   = fileexists("webserverinstallation.sh") ? file("webserverinstallation.sh") : null
+  user_data = <<EOF
+#!/bin/bash
+sudo yum -y update
+sudo yum -y install httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
+echo "<h1><center>" > index.html
+echo "Hello World from $(hostname -f) for R/&D_EPAM" >> index.html
+echo "</center></h1>" >> index.html
+mv index.html /var/www/html/
+EOF
+  #  provisioner "remote-exec" {
+  #    inline = [
+  #      "sudo yum -y update && sudo yum -y install httpd && sudo systemctl start httpd",
+  #      "echo '<h1><center>Jumpbox-a</center></h1>' > index.html",
+  #      "sudo mv index.html /var/www/html/"
+  #    ]
+  #    connection {
+  #      type        = "ssh"
+  #      user        = "ec2-user"
+  #      private_key = file("~/.ssh/id_rsa.pub")
+  #      host        = self.public_ip
+  #    }
+  #  }
+  tags = {
+    Name = "jumpbox-a"
+  }
+}
 
 #ami
 #Get Linux AMI ID using SSM Parameter endpoint in us-east-1
