@@ -10,7 +10,9 @@
 #kubectl get nodes -A
 #kubectl describe pod wordpress-7f78bb5f98-4pq22
 #kubectl describe pod wordpress-7f78bb5f98-4pq22 | tail -15
-
+#set environment variables 
+#AWS_ACCESS_KEY_ID
+#AWS_SECRET_ACCESS_KEY
 
 terraform {
   required_version = ">= 0.13"
@@ -52,9 +54,9 @@ module "eks" {
   worker_groups = [
     {
       name                          = "wordpress-worker-group-1a"
-      instance_type                 = "t2.small"
+      instance_type                 = "t2.medium"
       additional_userdata           = "echo foo bar"
-      asg_desired_capacity          = 3
+      asg_desired_capacity          = 2
       additional_security_group_ids = [aws_security_group.privateNSG.id]
     },
     {

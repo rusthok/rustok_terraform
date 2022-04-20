@@ -32,12 +32,12 @@ resource "kubernetes_deployment" "wordpress" {
 
           resources {
             limits = {
-              cpu    = "10000m"
+              cpu    = "10"
               memory = "10000Mi"
             }
             requests = {
-              cpu    = "500m"
-              memory = "500Mi"
+              cpu    = "1"
+              memory = "1000Mi"
             }
           }
         }
