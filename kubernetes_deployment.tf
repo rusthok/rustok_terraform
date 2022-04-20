@@ -8,7 +8,7 @@ resource "kubernetes_deployment" "wordpress" {
   }
 
   spec {
-    replicas = 2
+    replicas = 1
     selector {
       match_labels = {
         App = "wordpress"
@@ -32,12 +32,12 @@ resource "kubernetes_deployment" "wordpress" {
 
           resources {
             limits = {
-              cpu    = "5000m"
-              memory = "5000Mi"
+              cpu    = "7000m"
+              memory = "7000Mi"
             }
             requests = {
-              cpu    = "2000m"
-              memory = "1500Mi"
+              cpu    = "1000m"
+              memory = "1000Mi"
             }
           }
         }
