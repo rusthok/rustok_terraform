@@ -34,12 +34,12 @@ locals {
 }
 
 # Read information about the load balancer using the AWS provider.
-data "aws_elb" "example" {
-  name = local.lb_name
-}
+#data "aws_elb" "example" {
+#  name = local.lb_name
+#}
 
 #output "load_balancer_name" {
-  value = local.lb_name
+#  value = local.lb_name
 #}
 
 #output "load_balancer_hostname" {
