@@ -8,7 +8,7 @@ resource "kubernetes_deployment" "wordpress" {
   }
 
   spec {
-    replicas = 1
+    replicas = 2
     selector {
       match_labels = {
         App = "wordpress"
@@ -57,6 +57,7 @@ resource "kubernetes_deployment" "wordpress" {
     }
   }
 }
+
 
 resource "kubernetes_service" "kservice" {
   depends_on = [kubernetes_deployment.wordpress]
